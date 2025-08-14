@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agninshalah — Personal Portal</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f5f8;
+      color: #000;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .hero {
+      background: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      padding: 40px 20px;
+      border-radius: 6px;
+      margin-bottom: 30px;
+    }
+    .hero img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border: 1px solid #aaa;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      margin-bottom: 20px;
+    }
+    h1, .sub {
+      margin: 0;
+      font-size: 20px;
+    }
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .action-btn {
+      background: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      padding: 15px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: #000;
+      font-size: 20px;
+      display: block;
+    }
+    .action-btn:hover {
+      background: #f8f8f8;
+    }
+    footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV9wN_LxJcVYD-ktx07Y5a2BsxMW_sTFQZXw&s" alt="Welcome image" />
+      <h1>Hello, Agninshalah</h1>
+      <div class="sub" id="timeofday">Good day</div>
+    </div>
+    <div class="actions">
+      <a href="#" id="emailBtn" class="action-btn">Send an Email</a>
+      <a href="https://www.instagram.com" target="_blank" class="action-btn">Instagram</a>
+      <a href="https://news.google.com/" target="_blank" class="action-btn">Check the News</a>
+      <a href="https://chatgpt.com/" target="_blank" class="action-btn">Nurture</a>
+    </div>
+    <footer>
+      <span id="datetime"></span>
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      function updateDateTime() {
+        const now = new Date();
+        const h = now.getHours();
+        let part = 'day';
+        if (h >= 5 && h < 12) part = 'morning';
+        else if (h >= 12 && h < 17) part = 'afternoon';
+        else if (h >= 17 && h < 21) part = 'evening';
+        else part = 'night';
+        document.getElementById('timeofday').textContent = `Good ${part}`;
+
+        document.getElementById('datetime').textContent = now.toLocaleString();
+      }
+
+      updateDateTime();
+      setInterval(updateDateTime, 1000);
+
+      document.getElementById('emailBtn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const go = confirm('Open Gmail to compose a new email?');
+        if (go) {
+          const composeURL = 'https://mail.google.com/mail/?view=cm&fs=1&tf=1';
+          window.open(composeURL, '_blank', 'noopener');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
